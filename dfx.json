@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "canisters": {
+    "cards_backend": {
+      "type": "motoko",
+      "main": "src/cards_backend/main.mo"
+    },
+    "cards_frontend": {
+      "type": "assets",
+      "source": [
+        "src/cards_frontend/assets"
+      ],
+      "dependencies": [
+        "cards_backend"
+      ]
+    }
+  },
+  "defaults": {
+    "build": {
+      "packtool": "",
+      "args": ""
+    }
+  },
+  "output_env_file": ".env"
+}
