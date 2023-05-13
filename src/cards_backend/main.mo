@@ -38,25 +38,25 @@ actor {
     };
   };
 
-   public func shuffle() : async () {
-     if (busy) throw Error.reject("shuffle in progess");
-     busy := true;
-     var f = Random.Finite(await Random.blob());
-     var i : Nat = cards.size() - 1;
-     while (i > 0) {
-       switch (chooseMax(f, i + 1)) {
-         case (? j) {
-           let temp = cards[i];
-           cards[i] := cards[j];
-           cards[j] := temp;
-            i -= 1;
+  public func shuffle() : async () {
+    if (busy) throw Error.reject("shuffle in progess");
+    busy := true;
+    var f = Random.Finite(await Random.blob());
+    var i : Nat = cards.size() - 1;
+    while (i > 0) {
+      switch (chooseMax(f, i + 1)) {
+        case (? j) {
+          let temp = cards[i];
+          cards[i] := cards[j];
+          cards[j] := temp;
+          i -= 1;
          };
-         case null { // need more entropy
-           f := Random.Finite(await Random.blob());
-         }
-       }
-     };
-     busy := false;
+        case null { // need more entropy
+         f := Random.Finite(await Random.blob());
+        }
+      }
+    };
+    busy := false;
   };
   
   public query func show() : async Text {
