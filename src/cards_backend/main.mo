@@ -54,11 +54,11 @@ actor {
         }
       }
     };
-    deck := ? cards;
+    deck := ?cards;
   };
   
   public query func show() : async Text {
-    let ? cards = deck else throw Error.reject("shuffle in progess");
+    let ?cards = deck else throw Error.reject("shuffle in progess");
     var t = "";
     for (card in cards.vals()) {
        t #= Char.toText(card);
