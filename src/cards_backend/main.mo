@@ -12,7 +12,7 @@ actor {
     '🃁','🃂','🃃','🃄','🃅','🃆','🃇','🃈','🃉','🃊','🃋','🃌','🃍','🃎',
     '🃑','🃒','🃓','🃔','🃕','🃖','🃗','🃘','🃙','🃚','🃛','🃜','🃝','🃞',
     '🃏'
-    ];
+  ];
 
   func bit(b : Bool) : Nat {
     if (b) 1 else 0;
@@ -44,19 +44,18 @@ actor {
      var f = Random.Finite(await Random.blob());
      var i : Nat = cards.size() - 1;
      while (i > 0) {
-        switch (chooseMax(f, i + 1)) {
-          case (? j) { 
-            let temp = cards[i];
-            cards[i] := cards[j];
-            cards[j] := temp;
-             i -= 1;
-          };
-          case null { // need more entropy
-            f := Random.Finite(await Random.blob());
-          }
-        }
-     }
-     ;
+       switch (chooseMax(f, i + 1)) {
+         case (? j) {
+           let temp = cards[i];
+           cards[i] := cards[j];
+           cards[j] := temp;
+            i -= 1;
+         };
+         case null { // need more entropy
+           f := Random.Finite(await Random.blob());
+         }
+       }
+     };
      busy := false;
   };
   
