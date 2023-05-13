@@ -4,9 +4,7 @@ import Error = "mo:base/Error";
 
 actor {
 
-  var busy = false;
-
-  stable var cards : [var Char] = [var 
+  stable var deck : ?[var Char] = ?[var 
     '🂡','🂢','🂣','🂤','🂥','🂦','🂧','🂨','🂩','🂪','🂫','🂬','🂭','🂮',
     '🂱','🂲','🂳','🂴','🂵','🂶','🂷','🂸','🂹','🂺','🂻','🂼','🂽','🂾',
     '🃁','🃂','🃃','🃄','🃅','🃆','🃇','🃈','🃉','🃊','🃋','🃌','🃍','🃎',
@@ -39,28 +37,28 @@ actor {
   };
 
   public func shuffle() : async () {
-    if (busy) throw Error.reject("shuffle in progess");
-    busy := true;
+    let ?cards = deck else throw Error.reject("shuffle in progess");
+    deck := null;
     var f = Random.Finite(await Random.blob());
     var i : Nat = cards.size() - 1;
     while (i > 0) {
       switch (chooseMax(f, i + 1)) {
-        case (? j) {
+        case (?j) {
           let temp = cards[i];
           cards[i] := cards[j];
           cards[j] := temp;
           i -= 1;
-         };
+        };
         case null { // need more entropy
-         f := Random.Finite(await Random.blob());
+          f := Random.Finite(await Random.blob());
         }
       }
     };
-    busy := false;
+    deck := ? cards;
   };
   
   public query func show() : async Text {
-    if (busy) throw Error.reject("shuffle in progess");
+    let ? cards = deck else throw Error.reject("shuffle in progess");
     var t = "";
     for (card in cards.vals()) {
        t #= Char.toText(card);
