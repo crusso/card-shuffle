@@ -1,4 +1,4 @@
-# cards
+# Cards
 
 A simple canister holding a deck of unicode cards that can be `shuffle`d and `show`n, with basic concurrency control to prevent concurrent shuffling.
 
