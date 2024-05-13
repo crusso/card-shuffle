@@ -5,7 +5,8 @@ A simple canister holding a deck of unicode cards that can be `shuffle`d and `sh
 No frontend.
 
 In playground (snapshot)
-https://m7sm4-2iaaa-aaaab-qabra-cai.ic0.app/?tag=2829666590
+https://play.motoko.org/?tag=2675232834
+
 
 Welcome to your new cards project and to the internet computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
 
